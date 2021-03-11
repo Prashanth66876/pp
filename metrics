@@ -1,0 +1,52 @@
+#!/bin/bash
+
+if [ $# == 1 ]
+then
+   mem(){
+   total=`free | awk 'NR==2 {print $2}'`
+   used=`free | awk 'NR==2 {print $3}'`
+   free=`free | awk 'NR==2 {print $4}'`
+   shared=`free | awk 'NR==2 {print $5}'`
+   sw_total=`free | awk 'NR==4 {print $2}'`
+   sw_used=`free | awk 'NR==4 {print $3}'`
+   sw_free=`free | awk 'NR==4 {print $4}'`
+
+   echo -e "Sample output: \n"
+   echo -e "Virtual total $total \n"
+   echo -e "virtual used $used \n"
+   echo -e "virtual free $free \n"
+   echo -e "virtual shared $shared \n"
+   echo -e "swap total $sw_total \n"
+   echo -e "sawp used $sw_used \n"
+   echo -e "swap free sw_free \n"
+   }
+
+   cpu(){
+   idle=`sar | tail -2 | awk 'NR==1 {print $9}'`
+   user=`sar | tail -2 | awk 'NR==1 {print $4}'`
+   guest=`sar | tail -2 | awk 'NR==1 {print $5}'`
+   iowait=`sar | tail -2 | awk 'NR==1 {print $7}'`
+   stolen=`sar | tail -2 | awk 'NR==1 {print $8}'`
+   system=`sar | tail -2 | awk 'NR==1 {print $6}'`
+
+   echo -e "Sample output: \n"
+   echo -e "system.cpu.idle $idle \n"
+   echo -e "system.cpu.user $user \n"
+   echo -e "system.cpu.guest $guest \n"
+   echo -e "system.cpu.iowait $iowait \n"
+   echo -e "system.cpu.stolen $stolen \n"
+   echo -e "system.cpu.system $system \n"
+ }
+
+elif [ $# > $1 ]
+then
+    echo "***Please enter only single parameter either mem or cpu \n
+         cpu - prints CPU metrics \n
+         mem - prints RAM metrics"
+else
+   echo -e "###Please enter atleast one argument either mem or cpu to get details \n
+         cpu - prints CPU metrics \n
+         mem - prints RAM metrics"
+fi
+
+$1
