@@ -18,7 +18,7 @@ then
    echo -e "virtual shared $shared \n"
    echo -e "swap total $sw_total \n"
    echo -e "sawp used $sw_used \n"
-   echo -e "swap free sw_free \n"
+   echo -e "swap free $sw_free \n"
    }
 
    cpu(){
